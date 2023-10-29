@@ -235,7 +235,7 @@
                     $query = sprintf($this->getFormat(),$columns, $this->table, $this->parseParams());
                     break;
                 default:
-                    $format = "SELECT %s FROM %s WHERE %s ;"; 
+                    // $format = "SELECT %s FROM %s WHERE %s ;"; 
                     $query = sprintf($this->getFormat(),"*", $this->table, $this->parseParams());
                     break;
             }
