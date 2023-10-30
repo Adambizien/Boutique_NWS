@@ -1,8 +1,4 @@
 <?php
-if(isset($_SESSION['user'])) {
-    header("Location: ./?page=accueil&layout=html");
-    exit();
-}
 fromInc('login');
 $labels = ['Adresse email', 'Mot de passe'];
 $inputs = [
@@ -13,4 +9,3 @@ $inputs = [
 fromTool('formulaire');
 
 buildForm('Connexion',$labels, $inputs,'Connexion','POST','#');
-?>

@@ -1,8 +1,4 @@
 <?php
-if(isset($_SESSION['user'])) {
-    header("Location: ./?page=accueil&layout=html");
-    exit();
-}
 fromInc('signup');
 $labels = ['Nom', 'Prenom', 'Email','Adresse', 'Mot de passe', 'Confirmation mot de passe'];
 $inputs = [
@@ -17,5 +13,3 @@ $inputs = [
 fromTool('formulaire');
 
 buildForm('Inscription',$labels, $inputs,"s'inscrire",'POST','#');
-
-?>
