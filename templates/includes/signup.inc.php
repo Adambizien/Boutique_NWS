@@ -2,7 +2,7 @@
     use Adam\BoutiqueNws\Controller\SignupController;
     if(isset($_SESSION['user'])) {
         header("Location: ./?page=accueil&layout=html");
-        exit();
+        exit;
     }
     if(isset($_POST['submit'])){
         $signup = new SignupController();
