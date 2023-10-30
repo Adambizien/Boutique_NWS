@@ -55,7 +55,7 @@
                         <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
                         <li><?php echo $_SESSION['user_lastname'].' '.$_SESSION['user_name'] ?></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="./?page=profil&layout=html">Profile</a></li>
                         <li><a class="dropdown-item" href="#">Adresse</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="./?page=signout&layout=html">Déconnexion</a></li>
