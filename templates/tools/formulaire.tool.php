@@ -1,5 +1,5 @@
 <?php
-function buildForm($title,$labels, $inputs, $submit = 'Soumettre',$method = 'POST',$action = '#') {
+function buildForm($title,$labels, $inputs, $submit = 'Soumettre',$method = 'POST',$action = '#', $address = false) {
     if (count($labels) !== count($inputs)) {
         echo "Erreur : Les tableaux de labels et d'inputs ne sont pas de même taille.";
         return;
@@ -49,11 +49,18 @@ function buildForm($title,$labels, $inputs, $submit = 'Soumettre',$method = 'POS
             }
         }
         echo '" id="' . $inputID . '" name="' . $inputName . '" placeholder="' . $inputPlaceholder . '" value="';
-        if ($method === 'POST') {
-            echo isset($_POST["submit"]) ? (isset($_POST[$inputName]) && $inputName !== 'password' && $inputName !== 'password2' ?  $_POST[$inputName] :  "") :  "";
-        } elseif ($method === 'GET') {
-            echo isset($_GET["submit"]) ? (isset($_GET[$inputName]) ?  $_GET[$inputName] :  "") :  "";
+        if(isset($_POST['submit']) || isset($_GET['submit'])){
+            if ($method === 'POST') {
+                echo  (isset($_POST[$inputName]) && $inputName !== 'password' && $inputName !== 'password2' && $inputName !=="oldpassword" ?  $_POST[$inputName] :  "");
+            } elseif ($method === 'GET') {
+                echo (isset($_GET[$inputName]) ?  $_GET[$inputName] :  "");
+            }
+        }else if($address){
+            echo $_SESSION['user_address'];
+        }else{
+            echo "";
         }
+       
         echo '" '.$inputrRequired.'>';
         echo '</div>';
     }

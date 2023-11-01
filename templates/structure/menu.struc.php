@@ -51,12 +51,14 @@
                     <a href="#" class="d-block  text-decoration-none dropdown-toggle text-light">
                         <i class="bi bi-person-circle "></i>
                     </a>
-                    <ul class="dropdown-menu text-small" style="">
+                    <ul class="dropdown-menu text-small">
                         <!--<li><a class="dropdown-item" href="#">New project...</a></li>-->
-                        <li><?php echo $_SESSION['user_lastname'].' '.$_SESSION['user_name'] ?></li>
+                        <li class="text-center"><?php echo $_SESSION['user_lastname'].' '.$_SESSION['user_name'] ?></li>
                         <li><hr class="dropdown-divider"></li>
+                        <!--<li><a class="dropdown-item" href="./?page=adminmod&layout=html">Profile</a></li>-->
                         <li><a class="dropdown-item" href="./?page=profil&layout=html">Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Adresse</a></li>
+                        <li><a class="dropdown-item" href="./?page=updateaddress&layout=html">Adresse</a></li>
+                        <li><a class="dropdown-item" href="./?page=updatepassword&layout=html">Mot de passe</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="./?page=signout&layout=html">Déconnexion</a></li>
                     </ul>

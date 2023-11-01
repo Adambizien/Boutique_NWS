@@ -3,9 +3,15 @@ namespace Adam\BoutiqueNws\Controller;
 
 class SignoutController {
     
-    public function signout() {
-        session_destroy();
-        header("Location: ./?page=accueil&layout=html");
-        exit();
+    public function signout($login = false) {
+        if($login) {
+            session_destroy();
+            header("Location: ./?page=login&layout=html");
+            exit();
+        }else {
+            session_destroy();
+            header("Location: ./?page=accueil&layout=html");
+            exit();
+        }
     }
 }
