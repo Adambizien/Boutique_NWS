@@ -54,6 +54,20 @@ function fromTool($name){
         return false;
     }
 }
+function fromAdminMod($name){
+    if(file_exists("./templates/adminMod/". $name .".admod.php")){
+        include "./templates/adminMod/" . $name .".admod.php";
+    }else{
+        return false;
+    }
+}
+function fromIncAdminMod($name){
+    if(file_exists("./templates/includes/adminMod/". $name . ".inc.php")){
+        include "./templates/includes/adminMod/". $name . ".inc.php";
+    }else{
+        return false;
+    }
+}
 
 
 

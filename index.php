@@ -16,6 +16,17 @@ require_once './configs/bootstrap.php';
 session_start();
 ob_start();
 
+$argumentGet = ["page", "layout","product"];
+
+if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 999) {
+    $argumentGet[] = "adminMod";
+    $argumentGet[] = "id";
+}
+$extraKeys = array_diff(array_keys($_GET), $argumentGet);
+if (!empty($extraKeys)) {
+    header('Location: ./?page=accueil&layout=html');
+    exit;
+}
 if(isset($_GET["page"]) ){
     if(frompage($_GET['page']) === false){
         header('Location: ./?page=accueil&layout=html');
@@ -25,6 +36,17 @@ if(isset($_GET["page"]) ){
     header('Location: ./?page=accueil&layout=html');
     exit;
 }
+
+if(isset($_GET["adminMod"]) ){
+    if( $_GET["page"] !== 'adminMod' || fromAdminMod($_GET['adminMod']) === false){
+        header('Location: ./?page=accueil&layout=html');
+        exit;
+    };
+}
+
+
+
+
 
 $pageContent = [
     "html" => ob_get_clean(),

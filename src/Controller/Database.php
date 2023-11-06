@@ -105,7 +105,7 @@
                     break;
                 case 'get':
                 default:
-                    $format = "SELECT %s FROM %s WHERE %s ;";
+                    $format = "SELECT %s FROM %s WHERE %s ORDER BY id DESC ;";
                     break;
             }
             $this->format = $format;
@@ -245,4 +245,11 @@
             $this->lastResult = $this->connexion->query($this->getQuery());
             return $this->lastResult;
         }
+        //echaper les quote de data (utile pour image)
+        public function getEscaping(string $data){
+            $escapedString = $this->connexion->quote($data);
+            $escapedString = trim($escapedString, "'");
+            return $escapedString;
+        }
+        
     }

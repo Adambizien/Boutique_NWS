@@ -13,7 +13,7 @@ function buildForm($title,$labels, $inputs, $submit = 'Soumettre',$method = 'POS
     echo '<div class="row g-5 ">';
     echo '<div class="col-md-12 col-lg-12 ">';
     
-    echo '<form method = "'.$method.'" action="'.$action.'" >';
+    echo '<form method = "'.$method.'" action="'.$action.'"  enctype="multipart/form-data" >';
     echo '<div class="row ">';
 
     for ($i = 0; $i < count($labels); $i++) {
@@ -39,29 +39,120 @@ function buildForm($title,$labels, $inputs, $submit = 'Soumettre',$method = 'POS
         $inputType = isset($input['type']) ? $input['type'] : 'text';
         $inputID = $input['id'];
         $inputPlaceholder = isset($input['placeholder']) ? $input['placeholder'] : '';
-        
-        echo '<input type="' . $inputType . '" class="form-control ';
-        if($inputrRequired === 'required'){
-            if ($method === 'POST') {
-                echo isset($_POST["submit"]) ? (empty($_POST[$inputName]) ?  "is-invalid" :  "") :  "";
-            } elseif ($method === 'GET') {
-                echo isset($_GET["submit"]) ? (empty($_GET[$inputName]) ?  "is-invalid" :  "") :  "";
+
+        //checkbox, textarea, select
+        if($inputType === "checkbox"){
+            echo '<div class="form-check">';
+            echo '<input class="form-check-input"';
+            if($inputrRequired === 'required'){
+                if ($method === 'POST') {
+                    echo isset($_POST["submit"]) ? (empty($_POST[$inputName]) ?  "is-invalid" :  "") :  "";
+                } elseif ($method === 'GET') {
+                    echo isset($_GET["submit"]) ? (empty($_GET[$inputName]) ?  "is-invalid" :  "") :  "";
+                }
             }
-        }
-        echo '" id="' . $inputID . '" name="' . $inputName . '" placeholder="' . $inputPlaceholder . '" value="';
-        if(isset($_POST['submit']) || isset($_GET['submit'])){
-            if ($method === 'POST') {
-                echo  (isset($_POST[$inputName]) && $inputName !== 'password' && $inputName !== 'password2' && $inputName !=="oldpassword" ?  $_POST[$inputName] :  "");
-            } elseif ($method === 'GET') {
-                echo (isset($_GET[$inputName]) ?  $_GET[$inputName] :  "");
+            echo ' type="checkbox" id="'.$inputID.'" name="'. $inputName .'"';
+            if(isset($_POST['submit']) || isset($_GET['submit'])){
+                if ($method === 'POST') {
+                    echo  (isset($_POST[$inputName]) ?  "checked" :  "");
+                } else if ($method === 'GET') {
+                    echo (isset($_GET[$inputName]) ?  "checked" :  "");
+                }
             }
-        }else if($address){
-            echo $_SESSION['user_address'];
+            else if(isset($input['value'])){
+                echo "checked";
+            }
+            echo '>';
+            echo '</div>';
+        }else if($inputType === "textarea"){
+            echo '<textarea id="'.$inputID.'" class="form-control ';
+            if($inputrRequired === 'required'){
+                if ($method === 'POST') {
+                    echo isset($_POST["submit"]) ? (empty($_POST[$inputName]) ?  "is-invalid" :  "") :  "";
+                } elseif ($method === 'GET') {
+                    echo isset($_GET["submit"]) ? (empty($_GET[$inputName]) ?  "is-invalid" :  "") :  "";
+                }
+            }
+            echo '" name="'. $inputName .'" placeholder="'.$inputPlaceholder.'" '.$inputrRequired.'>';
+            if(isset($_POST['submit']) || isset($_GET['submit'])){
+                if ($method === 'POST') {
+                    echo  (isset($_POST[$inputName]) ?  $_POST[$inputName] :  "");
+                } elseif ($method === 'GET') {
+                    echo (isset($_GET[$inputName]) ?  $_GET[$inputName] :  "");
+                }
+            }else if(isset($input['value'])){
+                echo $input['value'];
+            }
+            echo '</textarea>';
+
+        }else if($inputType === "select"){
+            echo '<select class="form-select ';
+            if($inputrRequired === 'required'){
+                if ($method === 'POST') {
+                    echo isset($_POST["submit"]) ? (empty($_POST[$inputName]) ?  "is-invalid" :  "") :  "";
+                } elseif ($method === 'GET') {
+                    echo isset($_GET["submit"]) ? (empty($_GET[$inputName]) ?  "is-invalid" :  "") :  "";
+                }
+            }
+            echo '" id="' . $inputID . '" name="' . $inputName . '"  ';
+            
+            echo ' '.$inputrRequired.'>';
+            foreach($input['option'] as $optionKey => $option){ 
+                echo '<option value="'.$optionKey.'"';
+                if(isset($_POST['submit']) || isset($_GET['submit'])){
+                    if ($method === 'POST' && isset($_POST[$inputName]) && $_POST[$inputName] === $optionKey) {
+                        echo  (isset($_POST[$inputName]) ? "selected" :  "");
+                    } elseif ($method === 'GET' && isset($_GET[$inputName]) && $_GET[$inputName] === $optionKey ) {
+                        echo (isset($_GET[$inputName]) ? "selected" :  "");
+                    }
+                }else if(isset($input['value']) && $optionKey === $input['value']){
+                    echo "selected";
+                }
+                echo '>'.$option.'</option>';
+            }
+            echo '</select>';
+
+        }else if($inputType === "file"){
+            echo '<input type="' . $inputType . '" class="form-control ';
+            if($inputrRequired === 'required'){
+                echo isset($_POST["submit"]) ? (empty($_FILES[$inputName]['tmp_name']) ?  "is-invalid" :  "") :  "";  
+            }
+            echo '" id="' . $inputID . '" name="' . $inputName . '' ;
+            echo '" '.$inputrRequired.'>';
         }else{
-            echo "";
+            echo '<input type="' . $inputType . '" class="form-control ';
+            if($inputrRequired === 'required'){
+                if ($method === 'POST') {
+                    echo isset($_POST["submit"]) ? (empty($_POST[$inputName]) ?  "is-invalid" :  "") :  "";
+                } elseif ($method === 'GET') {
+                    echo isset($_GET["submit"]) ? (empty($_GET[$inputName]) ?  "is-invalid" :  "") :  "";
+                }
+            }
+            echo '" id="' . $inputID . '" name="' . $inputName . '" placeholder="' . $inputPlaceholder . '" value="';
+            if(isset($_POST['submit']) || isset($_GET['submit'])){
+                if ($method === 'POST') {
+                    echo  (isset($_POST[$inputName]) && $inputName !== 'password' && $inputName !== 'password2' && $inputName !=="oldpassword" ?  $_POST[$inputName] :  "");
+                } elseif ($method === 'GET') {
+                    echo (isset($_GET[$inputName]) ?  $_GET[$inputName] :  "");
+                }
+            }else if($address){
+                echo $_SESSION['user_address'];
+            }else if(isset($input['value'])){
+                echo $input['value'];
+            }else{
+                echo "";
+            }
+           
+            echo '"';
+            if(isset($input['min'])){
+                echo ' min="'.$input['min'].'"';
+            }
+            if(isset($input['max'])){
+                echo ' max="'.$input['max'].'"';
+            }
+            echo ''.$inputrRequired.'>';
         }
-       
-        echo '" '.$inputrRequired.'>';
+        
         echo '</div>';
     }
     echo '</div>';
