@@ -16,7 +16,7 @@ require_once './configs/bootstrap.php';
 session_start();
 ob_start();
 
-$argumentGet = ["page", "layout","product"];
+$argumentGet = ["page", "layout","product","id","category"];
 
 if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 999) {
     $argumentGet[] = "adminMod";

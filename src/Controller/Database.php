@@ -251,5 +251,23 @@
             $escapedString = trim($escapedString, "'");
             return $escapedString;
         }
+
+        public function searchFiltreTri($searchName,$filters = []){
+            $prepare = "SELECT * FROM `product` WHERE 1";
+
+            if (isset($filters) && $filters != []) {
+                $key = array_keys($filters);
+                $prepare .= " AND (".$key[0]." = " . $filters[$key[0]] . ")";
+            }
+            if ($searchName != '') {
+                $prepare .= " AND (name LIKE '%" . $searchName . "%')";
+            }
+            
+            $statement = $this->connexion->prepare($prepare);
+            $statement->execute();
+            $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $data;
+        }
+
         
     }
