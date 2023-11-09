@@ -20,7 +20,6 @@ $argumentGet = ["page", "layout","product","id","category"];
 
 if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 999) {
     $argumentGet[] = "adminMod";
-    $argumentGet[] = "id";
 }
 $extraKeys = array_diff(array_keys($_GET), $argumentGet);
 if (!empty($extraKeys)) {
