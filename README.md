@@ -22,4 +22,4 @@ Journal de bord du deuxieme projet php de la NWS
 - Création des fonctionnalités d'achat de panier ... [ici](https://github.com/Adambizien/Boutique_NWS/commit/399517f1bd67f46d34781680341fc726e8d9899d), [ici](https://github.com/Adambizien/Boutique_NWS/commit/0757abf93e46f6fd33f98db7e03a6b35a4f37e84) et [ici](https://github.com/Adambizien/Boutique_NWS/commit/d14ebf6509f884cec64cb4a68128d7e19f233923)
 
 ### Oublies :
--j'ai oublier la suppression des produit ^^ [ici]()
+-j'ai oublier la suppression des produit ^^ [ici](https://github.com/Adambizien/Boutique_NWS/commit/3890327166a6e2943b2dce483b2bcf1c84b1b1c3)
