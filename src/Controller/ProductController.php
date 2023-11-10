@@ -37,6 +37,19 @@ class ProductController {
             return false;
         }
     }
+    public function updateProductQuantityWithId(int $product_id) {
+        $statement = $this->db->table('product')->get(['filters'=>['id'=>$product_id]])->do();
+        $statement = $statement->fetch(PDO::FETCH_ASSOC);
+        if($statement['quantity'] <= 0){
+            return false;
+        }
+        try {
+            $this->db->table('product')->update(['post' => ["quantity" => $statement['quantity']-1],'filters'=>['id'=>$product_id]])->do();
+            return true;
+        }catch(\Exception $e) {
+            return false;
+        }
+    }
 
     public function getAllProducts(){
         $statement = $this->db->table('product')->get([])->do();
