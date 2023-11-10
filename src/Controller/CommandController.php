@@ -44,7 +44,9 @@ class CommandController {
     }
     public function getCommandByUser(int $user_id){
         $statement = $this->db->table('commande')->get(['filters'=>['user_id'=>$user_id]])->do();
-        $command = $statement->fetch(PDO::FETCH_ASSOC);
+        while ($line = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $command[] = $line;
+        }
         return $command;
     }
     public function getStatusById(int $id){

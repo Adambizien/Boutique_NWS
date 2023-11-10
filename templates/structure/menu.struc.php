@@ -1,5 +1,4 @@
 <?php
-
 use Adam\BoutiqueNws\Controller\CategoryController;
 
 $CategoryController = new CategoryController();
@@ -21,7 +20,7 @@ $category = $CategoryController->getAllCategory();
                         <a href="#" class="d-bloc text-decoration-none dropdown-toggle text-<?php echo isset($_GET['page']) && $_GET['page']==='category'? 'primary' :'light'; ?> ">
                             Category
                         </a>
-                        <ul class="dropdown-menu text-small" style="">
+                        <ul class="dropdown-menu text-small" >
                             <li><a class="dropdown-item" href="./?page=category&layout=html&category=all">Toute</a></li>
                             <?php foreach ($category as $key => $value) {
                                 echo '<li><a class="dropdown-item" href="./?page=category&layout=html&category='.$value['id'].'">'.$value['name'].'</a></li>';
@@ -52,6 +51,7 @@ $category = $CategoryController->getAllCategory();
                         <li class="text-center"><?php echo $_SESSION['user_lastname'].' '.$_SESSION['user_name'] ?></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="./?page=adminMod&layout=html&adminMod=product">Mode administrateur</a></li>
+                        <li><a class="dropdown-item" href="./?page=command&layout=html">Mes commandes</a></li>
                         <li><a class="dropdown-item" href="./?page=profil&layout=html">Profile</a></li>
                         <li><a class="dropdown-item" href="./?page=updateaddress&layout=html">Adresse</a></li>
                         <li><a class="dropdown-item" href="./?page=updatepassword&layout=html">Mot de passe</a></li>
