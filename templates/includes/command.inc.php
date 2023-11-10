@@ -19,7 +19,7 @@ foreach($command as $cm){
 ?>
 <ul class="list-unstyled">
     <li>
-        <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="./?page=productDetails&layout=html&product=<?php echo $product['id']; ?>">
+        <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top" href="./?page=commandDetails&layout=html&id=<?php echo $cm['id']; ?>">
         <img src="<?php echo $imageDataURL ;?>" style="height: 96px; width: 300px;" class="img-fluid">
         <div class="col-lg-8">
             <h6 class="mb-0"><?php echo $product['name'] ;?></h6>
