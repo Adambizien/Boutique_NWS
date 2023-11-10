@@ -1,3 +1,3 @@
 <?php
-dd($_SESSION);
+// dd($_SESSION);
 fromInc('accueil');

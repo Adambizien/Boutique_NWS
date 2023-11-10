@@ -216,7 +216,7 @@
                     $query = sprintf($this->getFormat(), $this->table, $this->parseParams('post', ' , '), $this->parseParams());
                     break;
                 case 'soft-delete':
-                    $query = sprintf($this->getFormat(), $this->table, "`status` = \"offline\"", $this->parseParams());
+                    $query = sprintf($this->getFormat(), $this->table, "`online` = false", $this->parseParams());
                     break;
                 case 'delete':
                     $query = sprintf($this->getFormat(), $this->table, $this->parseParams());

@@ -7,7 +7,7 @@
     if(isset($_POST['submit'])) {
         $products = $database->searchFiltreTri($_POST['search'],['first'=>true]);
     }else{
-        $products = $product->getProductByFilters(['first'=>true]);
+        $products = $product->getProductByFilters(['first'=>true,'online'=>true]);
     }
     foreach ($products as $key => $value) {
         $imageData = base64_encode($value['image']);

@@ -29,6 +29,15 @@ class ProductController {
             return false;
         }
     }
+    public function deleteProduct(int $id) {
+        try {
+            $this->db->table('product')->delete(['filters'=>['id'=>$id]])->do();
+            return true;
+        }catch(\Exception $e) {
+            echo $e;
+            return false;
+        }
+    }
     public function updateProductQuantity(int $quantity) {
         try {
             $this->db->table('product')->update(['post' => ["quantity" => $quantity],'filters'=>['id'=>$_GET['id']]])->do();
@@ -52,7 +61,7 @@ class ProductController {
     }
 
     public function getAllProducts(){
-        $statement = $this->db->table('product')->get([])->do();
+        $statement = $this->db->table('product')->get(['filters'=>['online'=>true]])->do();
         $products = [];
         while ($line = $statement->fetch(PDO::FETCH_ASSOC)) {
             $products[] = $line;

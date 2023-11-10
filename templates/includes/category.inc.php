@@ -8,7 +8,7 @@
     }else if(isset($_GET['category']) && $_GET['category'] == 'all') {
         $products = $product->getAllProducts();
     }else{
-        $products = $product->getProductByFilters(['category_id'=>$_GET['category']]);
+        $products = $product->getProductByFilters(['category_id'=>$_GET['category'],'online'=>true]);
     }
     foreach ($products as $key => $value) {
         $imageData = base64_encode($value['image']);

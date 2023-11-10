@@ -29,12 +29,14 @@
                                 <span class="size" data-toggle="tooltip" title="small"><?php echo $category;?></span>
                             </h5>
                         </div>
+                        <?php if($details['online'] === true){ ?>
                         <div class="col-6">
                             <form action="#" method="POST">
                                 <input type="hidden" name="product_id" value="<?php echo $details['id'];?>">
                                 <button class="add-to-cart btn btn-default btn-primary" type="submit" name="submit">Ajouter au panier</button>
                             </form>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
