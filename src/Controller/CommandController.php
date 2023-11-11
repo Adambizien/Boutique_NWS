@@ -47,7 +47,11 @@ class CommandController {
         while ($line = $statement->fetch(PDO::FETCH_ASSOC)) {
             $command[] = $line;
         }
-        return $command;
+        if(isset($command)){
+            return $command;
+        }else{
+            return [];
+        }
     }
     public function getStatusById(int $id){
         $statement = $this->db->table('statusCommande')->get(['filters'=>['id'=>$id]])->do();

@@ -16,6 +16,14 @@ class LoginController {
         while($line = $statement->fetch(PDO::FETCH_ASSOC)){
             $data[]=$line;
         }
+        if(!isset($data)){
+            echo '<div class="row">';
+            echo '<div class="container rounded bg-danger col-7">';
+            echo "<div class='col-5 mx-auto text-center'>Vos informations de connexion sont incorrectes. Veuillez vérifier votre email et votre mot de passe, puis réessayer.</div>";
+            echo "</div>";
+            echo "</div>";
+            return false;
+        }
         $hashed_password = password_verify($password, $data[0]['password']);
         if(isset($data) && $hashed_password){
             $_SESSION['user_name'] = $data[0]['name'];

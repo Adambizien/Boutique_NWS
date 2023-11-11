@@ -50,7 +50,9 @@ $category = $CategoryController->getAllCategory();
                     <ul class="dropdown-menu text-small">
                         <li class="text-center"><?php echo $_SESSION['user_lastname'].' '.$_SESSION['user_name'] ?></li>
                         <li><hr class="dropdown-divider"></li>
+                        <?php if(isset($_SESSION['user_role']) && $_SESSION['user_role'] === 999 ){ ?>
                         <li><a class="dropdown-item" href="./?page=adminMod&layout=html&adminMod=product">Mode administrateur</a></li>
+                        <?php } ?>
                         <li><a class="dropdown-item" href="./?page=command&layout=html">Mes commandes</a></li>
                         <li><a class="dropdown-item" href="./?page=profil&layout=html">Profile</a></li>
                         <li><a class="dropdown-item" href="./?page=updateaddress&layout=html">Adresse</a></li>
